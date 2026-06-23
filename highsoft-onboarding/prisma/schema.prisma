@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model UsuarioInterno {
+  id          Int               @id @default(autoincrement())
+  nome        String
+  email       String            @unique
+  senhaHash   String
+  perfil      String            @default("admin")
+  ativo       Boolean           @default(true)
+  criadoEm    DateTime          @default(now())
+  atualizadoEm DateTime         @updatedAt
+  historicos  HistoricoStatus[]
+  logs        LogSistema[]
+}
+
+model Cliente {
+  id                  Int          @id @default(autoincrement())
+  razaoSocial         String
+  cnpj                String
+  responsavelNome     String
+  responsavelWhatsapp String
+  responsavelEmail    String
+  criadoEm            DateTime     @default(now())
+  atualizadoEm        DateTime     @updatedAt
+  onboardings         Onboarding[]
+}
+
+model Onboarding {
+  id                         Int                  @id @default(autoincrement())
+  clienteId                  Int
+  tokenCliente               String               @unique
+  vendedorResponsavel        String
+  implantadorResponsavel     String
+  coordenadorResponsavel     String
+  analistaDbResponsavel      String
+  produtoModulosContratados  String
+  dataVenda                  DateTime?
+  dataEntradaOnboarding      DateTime?
+  dataOnboarding             DateTime?
+  status                     String               @default("Novo onboarding")
+  prioridade                 String               @default("Normal")
+  risco                      String               @default("Sem risco")
+  motivoRisco                String?
+  proximaAcao                String?
+  dataProximaAcao            DateTime?
+  observacoesInternas        String?
+  cienciaPrazo               Boolean              @default(false)
+  finalizadoCliente          Boolean              @default(false)
+  dataFinalizacaoCliente     DateTime?
+  bloqueadoParaCliente       Boolean              @default(false)
+  caminhoPasta               String?
+  clienteResponsavelEnvio    String?
+  clienteWhatsappEnvio       String?
+  clienteEmailEnvio          String?
+  usuariosPerfis             String?
+  informacoesMaquinas        String?
+  observacoesCliente         String?
+  criadoEm                   DateTime             @default(now())
+  atualizadoEm               DateTime             @updatedAt
+  cliente                    Cliente              @relation(fields: [clienteId], references: [id])
+  checklist                  ChecklistResposta[]
+  arquivos                   Arquivo[]
+  historicoStatus            HistoricoStatus[]
+  logs                       LogSistema[]
+}
+
+model ChecklistResposta {
+  id                    Int        @id @default(autoincrement())
+  onboardingId          Int
+  tipo                  String
+  codigoItem            String
+  tituloItem            String
+  obrigatorio           Boolean    @default(true)
+  statusCliente         String     @default("Pendente")
+  observacaoCliente     String?
+  statusHighsoft        String     @default("Pendente")
+  observacaoHighsoft    String?
+  criadoEm              DateTime   @default(now())
+  atualizadoEm          DateTime   @updatedAt
+  onboarding            Onboarding @relation(fields: [onboardingId], references: [id], onDelete: Cascade)
+  arquivos              Arquivo[]
+}
+
+model Arquivo {
+  id                    Int                 @id @default(autoincrement())
+  onboardingId          Int
+  checklistRespostaId   Int?
+  nomeOriginal          String
+  nomeSalvo             String
+  mimeType              String
+  tamanhoBytes          Int
+  caminhoRelativo       String
+  statusValidacao       String              @default("Recebido")
+  observacaoValidacao   String?
+  enviadoPor            String              @default("cliente")
+  criadoEm              DateTime            @default(now())
+  atualizadoEm          DateTime            @updatedAt
+  onboarding            Onboarding          @relation(fields: [onboardingId], references: [id], onDelete: Cascade)
+  checklistResposta     ChecklistResposta?  @relation(fields: [checklistRespostaId], references: [id], onDelete: SetNull)
+}
+
+model HistoricoStatus {
+  id              Int              @id @default(autoincrement())
+  onboardingId    Int
+  statusAnterior  String?
+  statusNovo      String
+  usuarioId       Int?
+  observacao      String?
+  criadoEm        DateTime         @default(now())
+  onboarding      Onboarding       @relation(fields: [onboardingId], references: [id], onDelete: Cascade)
+  usuario         UsuarioInterno?  @relation(fields: [usuarioId], references: [id], onDelete: SetNull)
+}
+
+model LogSistema {
+  id              Int              @id @default(autoincrement())
+  onboardingId    Int?
+  usuarioId       Int?
+  acao            String
+  detalhes        String?
+  ip              String?
+  userAgent       String?
+  criadoEm        DateTime         @default(now())
+  onboarding      Onboarding?      @relation(fields: [onboardingId], references: [id], onDelete: Cascade)
+  usuario         UsuarioInterno?  @relation(fields: [usuarioId], references: [id], onDelete: SetNull)
+}

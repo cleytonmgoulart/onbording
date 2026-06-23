@@ -1,0 +1,12 @@
+
+> highsoft-onboarding@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+  - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 5.2s
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 1060ms (72 modules)
