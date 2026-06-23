@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { CHECKLIST_OFICIAL, PRIORIDADES, RISCOS } from "@/lib/checklist";
+import { CHECKLIST_OFICIAL, PRIORIDADES } from "@/lib/checklist";
 
 export default function AdminOnboardingForm() {
   const [result, setResult] = useState<{ id: number; linkCliente: string } | null>(null);
@@ -110,18 +110,6 @@ export default function AdminOnboardingForm() {
               <option key={item}>{item}</option>
             ))}
           </select>
-        </label>
-        <label>
-          Risco
-          <select name="risco">
-            {RISCOS.map((item) => (
-              <option key={item}>{item}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Motivo do risco
-          <input name="motivoRisco" />
         </label>
         <label>
           Próxima ação

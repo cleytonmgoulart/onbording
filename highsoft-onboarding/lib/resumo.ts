@@ -86,8 +86,6 @@ export function resumoInterno(onboarding: OnboardingCompleto) {
     `Produto/módulos contratados: ${onboarding.produtoModulosContratados}`,
     `Status: ${onboarding.status}`,
     `Prioridade: ${onboarding.prioridade}`,
-    `Risco: ${onboarding.risco}`,
-    `Motivo do risco: ${onboarding.motivoRisco || "Não informado"}`,
     `Próxima ação: ${onboarding.proximaAcao || "Não informada"}`,
     `Pendências abertas: ${pendenciasAbertas(onboarding.checklist)}`,
     `Percentual de conclusão: ${percentualConclusao(onboarding.checklist)}%`,
@@ -105,7 +103,6 @@ export function manifest(onboarding: OnboardingCompleto) {
       id: onboarding.id,
       status: onboarding.status,
       prioridade: onboarding.prioridade,
-      risco: onboarding.risco,
       dataFinalizacaoCliente: onboarding.dataFinalizacaoCliente,
       caminhoPasta: onboarding.caminhoPasta
     },

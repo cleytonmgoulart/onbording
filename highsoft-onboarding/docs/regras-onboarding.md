@@ -11,7 +11,7 @@
 
 ## Triagem
 
-A triagem interna confere cliente, CNPJ, responsáveis, produto contratado, prioridade, risco e próxima ação. O status pode evoluir para primeiro contato, kickoff, aguardando documentos, validação e migração.
+A triagem interna confere cliente, CNPJ, responsáveis, produto contratado, prioridade e próxima ação. O status pode evoluir para primeiro contato, kickoff, aguardando documentos, validação e migração.
 
 ## Pendências
 

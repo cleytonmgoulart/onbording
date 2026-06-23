@@ -19,7 +19,6 @@ export const STATUS_ONBOARDING = [
 ];
 
 export const PRIORIDADES = ["Normal", "Alta", "Urgente"];
-export const RISCOS = ["Sem risco", "Atenção", "Alto risco", "Crítico"];
 export const STATUS_CLIENTE = ["Pendente", "Em andamento", "Enviado", "Concluído", "Não se aplica"];
 export const STATUS_VALIDACAO = ["Recebido", "Validado", "Recusado", "Precisa corrigir", "Não se aplica"];
 

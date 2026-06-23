@@ -80,7 +80,6 @@ export default function AdminOnboardingDetalhe({ onboarding, statusOptions, vali
           <h2>Dados Highsoft</h2>
           <p><strong>Status:</strong> <StatusBadge value={data.status} /></p>
           <p><strong>Prioridade:</strong> {data.prioridade}</p>
-          <p><strong>Risco:</strong> {data.risco}</p>
           <p><strong>Próxima ação:</strong> {data.proximaAcao || "Não informada"}</p>
           <p><strong>Pasta:</strong> {data.caminhoPasta || "Não criada"}</p>
         </div>

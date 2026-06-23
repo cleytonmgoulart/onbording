@@ -21,7 +21,7 @@ O `manifest.json` lista dados do cliente, dados do onboarding, status, data de f
 
 ## Como interpretar o resumo interno
 
-O `resumo_interno_highsoft.txt` consolida vendedor, implantador, coordenador, analista DB, produto, status, prioridade, risco, próxima ação, pendências abertas, percentual de conclusão e observações internas.
+O `resumo_interno_highsoft.txt` consolida vendedor, implantador, coordenador, analista DB, produto, status, prioridade, próxima ação, pendências abertas, percentual de conclusão e observações internas.
 
 ## Status utilizados
 
