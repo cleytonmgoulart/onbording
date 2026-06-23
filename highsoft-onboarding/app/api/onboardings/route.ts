@@ -4,6 +4,7 @@ import { requireAdmin } from "@/lib/auth";
 import { CHECKLIST_OFICIAL } from "@/lib/checklist";
 import { ensureOnboardingFolders, relativeOnboardingPath } from "@/lib/files";
 import { gerarTokenCliente } from "@/lib/tokens";
+import { upperText, upperTextOrNull } from "@/lib/text";
 import { requiredString } from "@/lib/validators";
 
 function dateOrNull(value: FormDataEntryValue | null) {
@@ -41,15 +42,30 @@ export async function POST(request: Request) {
   const user = await requireAdmin();
   const form = await request.formData();
   const tokenCliente = gerarTokenCliente();
+  const codigosSelecionados = new Set(form.getAll("checklistItens").map((item) => requiredString(item)));
+  const checklistSelecionado = CHECKLIST_OFICIAL.filter((item) => codigosSelecionados.has(item.codigoItem));
+
+  if (checklistSelecionado.length === 0) {
+    return NextResponse.json({ error: "Selecione pelo menos um item para enviar ao cliente." }, { status: 400 });
+  }
+
+  if (checklistSelecionado.length !== codigosSelecionados.size) {
+    return NextResponse.json({ error: "A seleção do checklist contém itens inválidos." }, { status: 400 });
+  }
+
+  const razaoSocial = upperText(form.get("razaoSocial"));
+  if (!razaoSocial) {
+    return NextResponse.json({ error: "Informe o nome da empresa." }, { status: 400 });
+  }
 
   const result = await prisma.$transaction(async (tx) => {
     const cliente = await tx.cliente.create({
       data: {
-        razaoSocial: requiredString(form.get("razaoSocial")),
-        cnpj: requiredString(form.get("cnpj")),
-        responsavelNome: requiredString(form.get("responsavelNome")),
-        responsavelWhatsapp: requiredString(form.get("responsavelWhatsapp")),
-        responsavelEmail: requiredString(form.get("responsavelEmail"))
+        razaoSocial,
+        cnpj: upperText(form.get("cnpj")),
+        responsavelNome: upperText(form.get("responsavelNome")),
+        responsavelWhatsapp: upperText(form.get("responsavelWhatsapp")),
+        responsavelEmail: upperText(form.get("responsavelEmail"))
       }
     });
 
@@ -57,22 +73,22 @@ export async function POST(request: Request) {
       data: {
         clienteId: cliente.id,
         tokenCliente,
-        vendedorResponsavel: requiredString(form.get("vendedorResponsavel")),
-        implantadorResponsavel: requiredString(form.get("implantadorResponsavel")),
-        coordenadorResponsavel: requiredString(form.get("coordenadorResponsavel")),
-        analistaDbResponsavel: requiredString(form.get("analistaDbResponsavel")),
-        produtoModulosContratados: requiredString(form.get("produtoModulosContratados")),
+        vendedorResponsavel: upperText(form.get("vendedorResponsavel")),
+        implantadorResponsavel: upperText(form.get("implantadorResponsavel")),
+        coordenadorResponsavel: upperText(form.get("coordenadorResponsavel")),
+        analistaDbResponsavel: upperText(form.get("analistaDbResponsavel")),
+        produtoModulosContratados: upperText(form.get("produtoModulosContratados")),
         dataVenda: dateOrNull(form.get("dataVenda")),
         dataEntradaOnboarding: dateOrNull(form.get("dataEntradaOnboarding")),
         dataOnboarding: dateOrNull(form.get("dataOnboarding")),
         prioridade: requiredString(form.get("prioridade")) || "Normal",
         risco: "Sem risco",
         motivoRisco: null,
-        proximaAcao: requiredString(form.get("proximaAcao")) || null,
+        proximaAcao: upperTextOrNull(form.get("proximaAcao")),
         dataProximaAcao: dateOrNull(form.get("dataProximaAcao")),
-        observacoesInternas: requiredString(form.get("observacoesInternas")) || null,
+        observacoesInternas: upperTextOrNull(form.get("observacoesInternas")),
         checklist: {
-          create: CHECKLIST_OFICIAL.map((item) => ({
+          create: checklistSelecionado.map((item) => ({
             tipo: item.tipo,
             codigoItem: item.codigoItem,
             tituloItem: item.tituloItem,

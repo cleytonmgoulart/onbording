@@ -2,31 +2,34 @@ import StatusBadge from "@/components/StatusBadge";
 
 export default function PainelCliente({ cliente, status, painel }: { cliente: string; status: string; painel: any }) {
   return (
-    <section className="client-panel">
-      <div>
+    <>
+      <section className="client-name-panel">
         <span>Cliente</span>
-        <strong>{cliente || "Cliente não informado"}</strong>
-      </div>
-      <div>
-        <span>Status</span>
-        <StatusBadge value={status} />
-      </div>
-      <div>
-        <span>Prazo das pendências</span>
-        <strong>{new Date(painel.prazo).toLocaleDateString("pt-BR")}</strong>
-      </div>
-      <div>
-        <span>Pendências abertas</span>
-        <strong>{painel.pendenciasAbertas}</strong>
-      </div>
-      <div>
-        <span>Conclusão</span>
-        <strong>{painel.percentualConclusao}%</strong>
-      </div>
-      <div>
-        <span>Situação do prazo</span>
-        <StatusBadge value={painel.situacaoPrazo} />
-      </div>
-    </section>
+        <strong>{cliente || "Cliente nao informado"}</strong>
+      </section>
+
+      <section className="client-panel">
+        <div>
+          <span>Status</span>
+          <StatusBadge value={status} />
+        </div>
+        <div>
+          <span>Prazo das pendencias</span>
+          <strong>{new Date(painel.prazo).toLocaleDateString("pt-BR")}</strong>
+        </div>
+        <div>
+          <span>Pendencias abertas</span>
+          <strong>{painel.pendenciasAbertas}</strong>
+        </div>
+        <div>
+          <span>Conclusao</span>
+          <strong>{painel.percentualConclusao}%</strong>
+        </div>
+        <div>
+          <span>Situacao do prazo</span>
+          <StatusBadge value={painel.situacaoPrazo} />
+        </div>
+      </section>
+    </>
   );
 }

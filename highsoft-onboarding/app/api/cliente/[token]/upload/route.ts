@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { quantidadeArquivosObrigatoria } from "@/lib/checklist";
 import { relativeOnboardingPath, saveUploadBuffer } from "@/lib/files";
 import { validarArquivo } from "@/lib/validators";
 
@@ -19,8 +20,15 @@ export async function POST(request: Request, { params }: { params: { token: stri
   }
 
   const checklist = onboarding.checklist.find((item) => item.id === checklistRespostaId);
+  const quantidadeObrigatoria = checklist ? quantidadeArquivosObrigatoria(checklist.codigoItem) : null;
+  const arquivosAtuais = checklist
+    ? await prisma.arquivo.count({ where: { onboardingId: onboarding.id, checklistRespostaId: checklist.id } })
+    : 0;
   if (!checklist) return NextResponse.json({ error: "Item do checklist inválido." }, { status: 400 });
   if (!files.length) return NextResponse.json({ error: "Nenhum arquivo enviado." }, { status: 400 });
+  if (quantidadeObrigatoria && arquivosAtuais + files.length > quantidadeObrigatoria) {
+    return NextResponse.json({ error: `Este item permite no maximo ${quantidadeObrigatoria} arquivo(s).` }, { status: 400 });
+  }
 
   const caminhoPasta = onboarding.caminhoPasta ?? relativeOnboardingPath(onboarding, onboarding.cliente);
   const enviados = [];
@@ -57,7 +65,12 @@ export async function POST(request: Request, { params }: { params: { token: stri
     data: {
       caminhoPasta,
       status: onboarding.status === "Novo onboarding" ? "Documentação parcial" : onboarding.status,
-      checklist: { update: { where: { id: checklist.id }, data: { statusCliente: "Enviado" } } },
+      checklist: {
+        update: {
+          where: { id: checklist.id },
+          data: { statusCliente: !quantidadeObrigatoria ? "Enviado" : arquivosAtuais + enviados.length >= quantidadeObrigatoria ? "Concluído" : "Pendente" }
+        }
+      },
       logs: { create: { acao: "cliente.upload", detalhes: `${enviados.length} arquivo(s) enviado(s).` } }
     }
   });

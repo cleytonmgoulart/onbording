@@ -169,3 +169,18 @@ export const CHECKLIST_OFICIAL: ChecklistModelo[] = [
 export function pastaDoItem(codigoItem?: string | null) {
   return CHECKLIST_OFICIAL.find((item) => item.codigoItem === codigoItem)?.pasta ?? "02_fiscal_banco_tecnico";
 }
+
+const ITENS_COM_CINCO_ARQUIVOS = new Set([
+  "clientes-que-mais-compram",
+  "clientes-maiores-titulos-aberto",
+  "ultimas-nf-clientes",
+  "produtos-que-mais-vendem",
+  "fornecedores-maiores-titulos",
+  "ultimas-nf-fornecedores",
+  "produtos-maior-estoque",
+  "danfe-clientes-que-mais-compram"
+]);
+
+export function quantidadeArquivosObrigatoria(codigoItem?: string | null) {
+  return codigoItem && ITENS_COM_CINCO_ARQUIVOS.has(codigoItem) ? 5 : null;
+}

@@ -1,10 +1,38 @@
 import { Arquivo, ChecklistResposta, Cliente, Onboarding } from "@prisma/client";
+import { quantidadeArquivosObrigatoria } from "@/lib/checklist";
 
 type OnboardingCompleto = Onboarding & {
   cliente: Cliente;
   checklist: (ChecklistResposta & { arquivos: Arquivo[] })[];
   arquivos: Arquivo[];
 };
+
+function parseItems(value?: string | null) {
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value);
+    if (Array.isArray(parsed?.items)) return parsed.items;
+    if (Array.isArray(parsed)) return parsed;
+  } catch {
+    return [];
+  }
+  return [];
+}
+
+function formatUsuariosPerfis(value?: string | null) {
+  const items = parseItems(value);
+  if (!items.length) return ["Sem usuarios informados."];
+  return items.map(
+    (item: any, index: number) =>
+      `- Usuario ${index + 1}: ${item.nome || "Nao informado"} | Senha: ${item.senha || "Nao informada"} | Setor: ${item.setor || item.perfil || "Nao informado"}`
+  );
+}
+
+function formatMaquinas(value?: string | null) {
+  const items = parseItems(value);
+  if (!items.length) return ["Sem maquinas informadas."];
+  return items.map((item: any, index: number) => `- Maquina ${index + 1}: ${item.identificacao || "Nao informada"} | ${item.detalhes || "Sem detalhes"}`);
+}
 
 export function addBusinessDays(start: Date, days: number) {
   const date = new Date(start);
@@ -22,6 +50,18 @@ export function prazoPendencias(onboarding: Pick<Onboarding, "dataOnboarding" | 
 }
 
 export function itemConcluido(item: ChecklistResposta & { arquivos?: Arquivo[] }) {
+  const quantidadeObrigatoria = quantidadeArquivosObrigatoria(item.codigoItem);
+  const quantidadeArquivos = item.arquivos?.length ?? 0;
+
+  if (quantidadeObrigatoria) {
+    return (
+      quantidadeArquivos >= quantidadeObrigatoria ||
+      item.statusCliente === "NÃ£o se aplica" ||
+      item.statusHighsoft === "Validado" ||
+      item.statusHighsoft === "NÃ£o se aplica"
+    );
+  }
+
   return (
     item.statusCliente === "Concluído" ||
     item.statusCliente === "Enviado" ||
@@ -69,6 +109,12 @@ export function resumoCliente(onboarding: OnboardingCompleto) {
     "",
     "Arquivos enviados:",
     ...onboarding.arquivos.map((arquivo) => `- ${arquivo.nomeOriginal} | ${arquivo.caminhoRelativo}`),
+    "",
+    "Usuarios e perfis:",
+    ...formatUsuariosPerfis(onboarding.usuariosPerfis),
+    "",
+    "Maquinas:",
+    ...formatMaquinas(onboarding.informacoesMaquinas),
     "",
     "Observações do cliente:",
     onboarding.observacoesCliente || "Sem observações."

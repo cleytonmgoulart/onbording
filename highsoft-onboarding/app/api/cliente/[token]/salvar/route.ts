@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { uppercaseJsonText, upperTextOrNull, upperTextOrUndefined } from "@/lib/text";
 
 export async function POST(request: Request, { params }: { params: { token: string } }) {
   const body = await request.json();
@@ -13,30 +14,30 @@ export async function POST(request: Request, { params }: { params: { token: stri
     await tx.cliente.update({
       where: { id: onboarding.clienteId },
       data: {
-        razaoSocial: String(body.razaoSocial ?? "").trim() || undefined,
-        cnpj: String(body.cnpj ?? "").trim() || undefined,
-        responsavelNome: String(body.responsavelNome ?? "").trim() || undefined,
-        responsavelWhatsapp: String(body.responsavelWhatsapp ?? "").trim() || undefined,
-        responsavelEmail: String(body.responsavelEmail ?? "").trim() || undefined
+        razaoSocial: upperTextOrUndefined(body.razaoSocial),
+        cnpj: upperTextOrUndefined(body.cnpj),
+        responsavelNome: upperTextOrUndefined(body.responsavelNome),
+        responsavelWhatsapp: upperTextOrUndefined(body.responsavelWhatsapp),
+        responsavelEmail: upperTextOrUndefined(body.responsavelEmail)
       }
     });
 
     await tx.onboarding.update({
       where: { id: onboarding.id },
       data: {
-        clienteResponsavelEnvio: String(body.clienteResponsavelEnvio ?? "").trim() || null,
-        clienteWhatsappEnvio: String(body.clienteWhatsappEnvio ?? "").trim() || null,
-        clienteEmailEnvio: String(body.clienteEmailEnvio ?? "").trim() || null,
+        clienteResponsavelEnvio: upperTextOrNull(body.clienteResponsavelEnvio),
+        clienteWhatsappEnvio: upperTextOrNull(body.clienteWhatsappEnvio),
+        clienteEmailEnvio: upperTextOrNull(body.clienteEmailEnvio),
         cienciaPrazo: Boolean(body.cienciaPrazo),
-        usuariosPerfis: String(body.usuariosPerfis ?? "").trim() || null,
-        informacoesMaquinas: String(body.informacoesMaquinas ?? "").trim() || null,
-        observacoesCliente: String(body.observacoesCliente ?? "").trim() || null,
+        usuariosPerfis: uppercaseJsonText(body.usuariosPerfis),
+        informacoesMaquinas: uppercaseJsonText(body.informacoesMaquinas),
+        observacoesCliente: upperTextOrNull(body.observacoesCliente),
         checklist: {
           update: (body.checklist ?? []).map((item: { id: number; statusCliente: string; observacaoCliente: string }) => ({
             where: { id: Number(item.id) },
             data: {
               statusCliente: item.statusCliente || "Pendente",
-              observacaoCliente: item.observacaoCliente?.trim() || null
+              observacaoCliente: upperTextOrNull(item.observacaoCliente)
             }
           }))
         }

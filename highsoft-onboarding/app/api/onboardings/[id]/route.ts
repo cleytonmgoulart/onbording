@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth";
 import { STATUS_VALIDACAO } from "@/lib/checklist";
+import { removeOnboardingFolder } from "@/lib/files";
 
 export async function GET(_: Request, { params }: { params: { id: string } }) {
   await requireAdmin();
@@ -44,4 +45,41 @@ export async function PATCH(request: Request, { params }: { params: { id: string
   });
 
   return NextResponse.json(arquivo);
+}
+
+export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+  const user = await requireAdmin();
+  const id = Number(params.id);
+
+  if (!Number.isFinite(id)) {
+    return NextResponse.json({ error: "Onboarding invalido." }, { status: 400 });
+  }
+
+  const existente = await prisma.onboarding.findUnique({
+    where: { id },
+    select: { id: true, clienteId: true, caminhoPasta: true, cliente: { select: { razaoSocial: true } } }
+  });
+
+  if (!existente) return NextResponse.json({ error: "Onboarding nao encontrado." }, { status: 404 });
+
+  await prisma.$transaction(async (tx) => {
+    await tx.onboarding.delete({ where: { id } });
+
+    const outrosOnboardings = await tx.onboarding.count({ where: { clienteId: existente.clienteId } });
+    if (outrosOnboardings === 0) {
+      await tx.cliente.delete({ where: { id: existente.clienteId } });
+    }
+
+    await tx.logSistema.create({
+      data: {
+        usuarioId: user.id,
+        acao: "onboarding.excluido",
+        detalhes: `Onboarding excluido: ${existente.cliente.razaoSocial || existente.id}`
+      }
+    });
+  });
+
+  await removeOnboardingFolder(existente.caminhoPasta);
+
+  return NextResponse.json({ ok: true });
 }

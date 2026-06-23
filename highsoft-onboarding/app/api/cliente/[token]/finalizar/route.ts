@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { gerarDocumentoOdf } from "@/lib/odf";
+import { gerarPdfTexto } from "@/lib/pdf";
 import { manifest, pendenciasAbertas, resumoCliente, resumoInterno } from "@/lib/resumo";
-import { relativeOnboardingPath, writeResumoFile } from "@/lib/files";
+import { relativeOnboardingPath, writeResumoBuffer, writeResumoFile } from "@/lib/files";
 
 const STATUS_FINAL = "Documentos enviados - aguardando DB/migração";
 
@@ -60,9 +62,12 @@ export async function POST(request: Request, { params }: { params: { token: stri
     }
   });
 
-  await writeResumoFile(caminhoPasta, "resumo_cliente.txt", resumoCliente(atualizado));
+  const textoResumoCliente = resumoCliente(atualizado);
+  await writeResumoFile(caminhoPasta, "resumo_cliente.txt", textoResumoCliente);
   await writeResumoFile(caminhoPasta, "resumo_interno_highsoft.txt", resumoInterno(atualizado));
   await writeResumoFile(caminhoPasta, "manifest.json", JSON.stringify(manifest(atualizado), null, 2));
+  await writeResumoBuffer(caminhoPasta, "respostas_cliente.odt", gerarDocumentoOdf(atualizado));
+  await writeResumoBuffer(caminhoPasta, "respostas_cliente.pdf", gerarPdfTexto("Respostas do cliente", textoResumoCliente));
 
-  return NextResponse.json({ ok: true, status: STATUS_FINAL });
+  return NextResponse.json({ ok: true, status: STATUS_FINAL, pdfGerado: true });
 }

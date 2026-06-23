@@ -2,13 +2,33 @@
 
 import { ChangeEvent, useState } from "react";
 
-export default function UploadArquivos({ token, itemId, disabled, onUploaded }: { token: string; itemId: number; disabled: boolean; onUploaded: () => void }) {
+export default function UploadArquivos({
+  token,
+  itemId,
+  disabled,
+  maxFiles,
+  currentFiles,
+  onUploaded
+}: {
+  token: string;
+  itemId: number;
+  disabled: boolean;
+  maxFiles?: number | null;
+  currentFiles?: number;
+  onUploaded: () => void;
+}) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const reachedLimit = Boolean(maxFiles && (currentFiles ?? 0) >= maxFiles);
 
   async function upload(event: ChangeEvent<HTMLInputElement>) {
     const files = event.target.files;
     if (!files?.length) return;
+    if (maxFiles && (currentFiles ?? 0) + files.length > maxFiles) {
+      setError(`Este item permite no maximo ${maxFiles} arquivo(s).`);
+      event.target.value = "";
+      return;
+    }
     setLoading(true);
     setError("");
     const form = new FormData();
@@ -29,11 +49,11 @@ export default function UploadArquivos({ token, itemId, disabled, onUploaded }: 
     <div className="upload-controls">
       <label className="file-button">
         Bater foto
-        <input disabled={disabled || loading} type="file" accept="image/*" capture="environment" onChange={upload} />
+        <input disabled={disabled || loading || reachedLimit} type="file" accept="image/*" capture="environment" onChange={upload} />
       </label>
       <label className="file-button">
         Anexar arquivo
-        <input disabled={disabled || loading} type="file" multiple onChange={upload} />
+        <input disabled={disabled || loading || reachedLimit} type="file" multiple onChange={upload} />
       </label>
       {loading && <span className="muted">Enviando...</span>}
       {error && <span className="form-error">{error}</span>}

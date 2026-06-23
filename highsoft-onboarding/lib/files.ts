@@ -77,3 +77,15 @@ export async function writeResumoFile(onboardingPath: string, fileName: string, 
   await fs.mkdir(folder, { recursive: true });
   await fs.writeFile(path.join(folder, fileName), content, "utf8");
 }
+
+export async function writeResumoBuffer(onboardingPath: string, fileName: string, content: Buffer) {
+  const folder = path.join(storageBasePath(), onboardingPath, "05_resumos");
+  await fs.mkdir(folder, { recursive: true });
+  await fs.writeFile(path.join(folder, fileName), content);
+}
+
+export async function removeOnboardingFolder(relativePathValue?: string | null) {
+  if (!relativePathValue) return;
+  const absolute = absoluteFromRelative(relativePathValue);
+  await fs.rm(absolute, { recursive: true, force: true });
+}

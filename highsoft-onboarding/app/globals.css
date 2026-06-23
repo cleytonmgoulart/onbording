@@ -41,6 +41,11 @@ textarea {
   font: inherit;
 }
 
+input:not([type="date"]),
+textarea {
+  text-transform: uppercase;
+}
+
 textarea {
   min-height: 96px;
   resize: vertical;
@@ -51,6 +56,24 @@ label {
   gap: 7px;
   color: #35435a;
   font-weight: 700;
+  position: relative;
+}
+
+.required-mark {
+  color: var(--red);
+  font-weight: 900;
+}
+
+label:has(input[required])::before,
+label:has(textarea[required])::before,
+label:has(select[required])::before,
+.required-label::before {
+  content: "*";
+  color: var(--red);
+  font-weight: 900;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 table {
@@ -183,6 +206,12 @@ textarea:disabled {
   border-color: var(--line);
 }
 
+.danger-button {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+
 .status-grid,
 .client-panel {
   display: grid;
@@ -192,6 +221,7 @@ textarea:disabled {
 }
 
 .metric,
+.client-name-panel,
 .client-panel > div,
 .panel,
 .notice,
@@ -205,6 +235,26 @@ textarea:disabled {
 .metric,
 .client-panel > div {
   padding: 16px;
+}
+
+.client-name-panel {
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+
+.client-name-panel span {
+  color: var(--muted);
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.client-name-panel strong {
+  display: block;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
 .metric strong,
@@ -311,10 +361,126 @@ textarea:disabled {
   margin: 0 0 8px;
 }
 
+.checklist-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.checklist-header h2 {
+  margin: 0;
+}
+
+.checklist-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.checklist-option {
+  grid-template-columns: auto 1fr;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f9fbfe;
+  font-weight: 700;
+}
+
+.checklist-option input {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+
+.checklist-option span,
+.checklist-option small {
+  display: grid;
+  gap: 4px;
+}
+
+.checklist-option small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .checklist-admin,
 .file-list {
   display: grid;
   gap: 12px;
+}
+
+.client-file-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.client-file-row p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.dynamic-list-panel h2,
+.section-title-row h2 {
+  margin: 0;
+}
+
+.section-title-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.dynamic-list {
+  display: grid;
+  gap: 12px;
+}
+
+.dynamic-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f9fbfe;
+}
+
+.machine-row {
+  grid-template-columns: 0.8fr 1.2fr auto;
+}
+
+.module-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.module-chip {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  padding: 8px 12px;
+}
+
+.module-chip.selected {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
 }
 
 .file-row {
@@ -399,6 +565,23 @@ textarea:disabled {
   font-weight: 800;
 }
 
+.quantity-warning {
+  color: var(--red);
+  font-weight: 900;
+  margin: 8px 0 12px;
+}
+
+.quantity-success {
+  color: var(--green);
+  font-weight: 900;
+  margin: 8px 0 12px;
+}
+
+.completed-card {
+  border-color: #9fd7b8;
+  background: #f2fbf6;
+}
+
 .success-box {
   border-color: #b7e2ca;
   background: #f2fbf6;
@@ -417,6 +600,8 @@ textarea:disabled {
   }
 
   .toolbar,
+  .checklist-header,
+  .section-title-row,
   .topbar,
   .client-header,
   .inline-form,
@@ -428,7 +613,11 @@ textarea:disabled {
   .filters,
   .form-grid,
   .detail-grid,
-  .file-row {
+  .file-row,
+  .client-file-row,
+  .dynamic-row,
+  .machine-row,
+  .checklist-selector {
     grid-template-columns: 1fr;
   }
 

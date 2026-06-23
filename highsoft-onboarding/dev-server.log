@@ -7,50 +7,143 @@
   - Environments: .env
 
  ✓ Starting...
- ✓ Ready in 5.2s
- ○ Compiling /middleware ...
- ✓ Compiled /middleware in 1060ms (72 modules)
- ○ Compiling /admin/login ...
- ✓ Compiled /admin/login in 5.9s (461 modules)
- GET /admin/login 200 in 6346ms
+ ✓ Ready in 3.4s
  ○ Compiling / ...
- ✓ Compiled / in 1091ms (493 modules)
- GET / 200 in 1486ms
- ✓ Compiled /api/admin/login in 503ms (289 modules)
- POST /api/admin/login 200 in 1512ms
- ✓ Compiled /admin in 495ms (551 modules)
- GET /admin 200 in 955ms
- ✓ Compiled /admin/onboardings/novo in 505ms (560 modules)
- ○ Compiling /api/onboardings ...
- ✓ Compiled /api/onboardings in 546ms (314 modules)
- POST /api/onboardings 200 in 866ms
- ○ Compiling /admin/onboardings/[id] ...
- ✓ Compiled /admin/onboardings/[id] in 835ms (573 modules)
+ ✓ Compiled / in 6.3s (497 modules)
+ GET / 200 in 6693ms
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 581ms (72 modules)
+ ○ Compiling /admin ...
+ ✓ Compiled /admin in 4.3s (517 modules)
+ ✓ Compiled /admin/onboardings/[id] in 370ms (524 modules)
+ ✓ Compiled /api/onboardings/[id] in 327ms (307 modules)
+ DELETE /api/onboardings/7 200 in 1103ms
+ GET /admin 200 in 180ms
+ ○ Compiling /admin/onboardings/novo ...
+ ✓ Compiled /admin/onboardings/novo in 723ms (533 modules)
+ ✓ Compiled /api/onboardings in 237ms (315 modules)
+ POST /api/onboardings 200 in 448ms
  ○ Compiling /cliente/[token] ...
- ✓ Compiled /cliente/[token] in 755ms (589 modules)
- GET /cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs 200 in 2119ms
- ○ Compiling /api/cliente/[token]/upload ...
- ✓ Compiled /api/cliente/[token]/upload in 626ms (326 modules)
- POST /api/cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs/upload 200 in 1826ms
- ✓ Compiled /api/cliente/[token] in 383ms (328 modules)
- GET /api/cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs 200 in 1503ms
- POST /api/cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs/upload 200 in 101ms
- GET /api/cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs 200 in 52ms
- GET /cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs 200 in 371ms
- ✓ Compiled in 1481ms (550 modules)
- ✓ Compiled in 588ms (550 modules)
- ✓ Compiled in 540ms (550 modules)
- ✓ Compiled in 640ms (550 modules)
- ✓ Compiled in 512ms (550 modules)
- ✓ Compiled in 505ms (564 modules)
- GET /admin/onboardings/novo 200 in 240ms
- ○ Compiling /_not-found ...
- ✓ Compiled /_not-found in 1215ms (553 modules)
- GET /_next/static/css/app/layout.css?v=1782175083871 404 in 1649ms
- GET /_next/static/chunks/webpack.js?v=1782175083871 404 in 1645ms
- GET /_next/static/chunks/main-app.js?v=1782175083871 404 in 1628ms
- GET /_next/static/chunks/app-pages-internals.js 404 in 1627ms
- GET /_next/static/chunks/app/admin/onboardings/novo/page.js 404 in 1627ms
- ○ Compiling /_error ...
- ✓ Compiled /_error in 2.9s (780 modules)
- GET /admin/login 500 in 3433ms
+ ✓ Compiled /cliente/[token] in 1284ms (583 modules)
+ GET /cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 2483ms
+ ✓ Compiled /api/cliente/[token]/upload in 254ms (324 modules)
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 200 in 1044ms
+ ✓ Compiled /api/cliente/[token] in 185ms (326 modules)
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 917ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 200 in 94ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 34ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 400 in 321ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 200 in 73ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 35ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 400 in 41ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 400 in 102ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 200 in 69ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 37ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 200 in 72ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 31ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 200 in 71ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 38ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 200 in 74ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 47ms
+ ✓ Compiled in 726ms (584 modules)
+ ✓ Compiled in 209ms (326 modules)
+ ✓ Compiled /api/cliente/[token]/salvar in 237ms (328 modules)
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/salvar 200 in 1228ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 52ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/salvar 200 in 62ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 43ms
+ ✓ Compiled in 348ms (328 modules)
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/salvar 200 in 63ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 36ms
+ ✓ Compiled /api/cliente/[token]/finalizar in 346ms (331 modules)
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/finalizar 400 in 1225ms
+ ✓ Compiled in 357ms (331 modules)
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/salvar 200 in 60ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 39ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/finalizar 400 in 42ms
+ ✓ Compiled in 203ms (328 modules)
+ ✓ Compiled in 313ms (328 modules)
+ ✓ Compiled in 792ms (586 modules)
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/salvar 200 in 127ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 42ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/finalizar 400 in 51ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/salvar 200 in 54ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 34ms
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/finalizar 400 in 44ms
+ ✓ Compiled in 429ms (586 modules)
+ ✓ Compiled in 735ms (600 modules)
+ ✓ Compiled /api/cliente/[token]/arquivos/[id] in 337ms (330 modules)
+ DELETE /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/arquivos/8 200 in 1222ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 35ms
+ DELETE /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/arquivos/7 200 in 77ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 70ms
+ ✓ Compiled in 574ms (588 modules)
+ ✓ Compiled /api/cliente/[token]/upload in 323ms (333 modules)
+ POST /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10/upload 200 in 725ms
+ GET /api/cliente/sZrSN0SZOuoHFfL9uNSQ474kyPtTMiWXnITzXUAUd10 200 in 80ms
+ ✓ Compiled in 435ms (605 modules)
+ ✓ Compiled in 534ms (591 modules)
+ ✓ Compiled in 242ms (333 modules)
+ ✓ Compiled in 224ms (328 modules)
+ ✓ Compiled in 267ms (291 modules)
+ ✓ Compiled in 617ms (549 modules)
+ GET /admin 200 in 443ms
+ ✓ Compiled in 454ms (549 modules)
+ ✓ Compiled in 411ms (563 modules)
+ ✓ Compiled /api/onboardings/[id] in 244ms (323 modules)
+ DELETE /api/onboardings/8 200 in 696ms
+ GET /admin 200 in 255ms
+ ✓ Compiled in 652ms (549 modules)
+ GET /admin 200 in 289ms
+ GET /admin 200 in 67ms
+ GET / 200 in 55ms
+ ✓ Compiled /api/onboardings in 328ms (325 modules)
+ POST /api/onboardings 200 in 589ms
+ GET /cliente/Yvop3UthQqG0Llr8azfj3iUG9ZFu-DqjTxa0Xf9ePrQ 200 in 541ms
+ ✓ Compiled in 514ms (597 modules)
+ ✓ Compiled in 478ms (563 modules)
+ ✓ Compiled in 452ms (549 modules)
+ ✓ Compiled in 352ms (549 modules)
+ ✓ Compiled in 323ms (549 modules)
+ ✓ Compiled in 585ms (549 modules)
+ ✓ Compiled in 428ms (563 modules)
+ GET / 200 in 174ms
+ GET / 200 in 68ms
+ ✓ Compiled /api/onboardings/[id] in 344ms (323 modules)
+ DELETE /api/onboardings/9 200 in 553ms
+ GET /admin 200 in 250ms
+ ✓ Compiled /api/onboardings in 339ms (327 modules)
+ POST /api/onboardings 200 in 495ms
+ GET /cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 211ms
+ ✓ Compiled in 580ms (549 modules)
+ ✓ Compiled /api/cliente/[token]/upload in 479ms (324 modules)
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/upload 200 in 1063ms
+ ○ Compiling /api/cliente/[token] ...
+ ✓ Compiled /api/cliente/[token] in 758ms (326 modules)
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 1092ms
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/upload 200 in 76ms
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 40ms
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/upload 200 in 69ms
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 37ms
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/upload 200 in 86ms
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 43ms
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/upload 200 in 75ms
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 42ms
+ ✓ Compiled in 554ms (584 modules)
+ ✓ Compiled /api/cliente/[token]/salvar in 746ms (584 modules)
+ ✓ Compiled (587 modules)
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/salvar 200 in 630ms
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 97ms
+ ✓ Compiled in 508ms (601 modules)
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/salvar 200 in 71ms
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 50ms
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/salvar 200 in 63ms
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 53ms
+ ✓ Compiled /api/cliente/[token]/finalizar in 452ms (330 modules)
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/finalizar 400 in 648ms
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/salvar 200 in 57ms
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 43ms
+ POST /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo/finalizar 200 in 92ms
+ GET /api/cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 30ms
+ ✓ Compiled in 638ms (549 modules)
+ GET /cliente/GZAADqzaRv2aedxsRq1e5iMf-WL4GHqS0Ffv_wFXZpo 200 in 336ms

@@ -11,12 +11,27 @@ type Props = {
   appUrl: string;
 };
 
+function parseItems(value?: string | null) {
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value);
+    if (Array.isArray(parsed?.items)) return parsed.items;
+    if (Array.isArray(parsed)) return parsed;
+  } catch {
+    return [];
+  }
+  return [];
+}
+
 export default function AdminOnboardingDetalhe({ onboarding, statusOptions, validacaoOptions, appUrl }: Props) {
   const [data, setData] = useState(onboarding);
   const [status, setStatus] = useState(onboarding.status);
+  const [deleting, setDeleting] = useState(false);
   const linkCliente = `${appUrl}/cliente/${data.tokenCliente}`;
 
   const arquivos = useMemo(() => data.checklist.flatMap((item: any) => item.arquivos), [data]);
+  const usuariosPerfis = useMemo(() => parseItems(data.usuariosPerfis), [data.usuariosPerfis]);
+  const maquinas = useMemo(() => parseItems(data.informacoesMaquinas), [data.informacoesMaquinas]);
 
   async function alterarStatus() {
     const response = await fetch(`/api/onboardings/${data.id}/status`, {
@@ -45,6 +60,23 @@ export default function AdminOnboardingDetalhe({ onboarding, statusOptions, vali
     }
   }
 
+  async function excluirOnboarding() {
+    const nome = data.cliente.razaoSocial || `onboarding ${data.id}`;
+    const confirmado = window.confirm(`Excluir definitivamente ${nome}? Esta acao remove o onboarding, arquivos e pasta do cliente.`);
+    if (!confirmado) return;
+
+    setDeleting(true);
+    const response = await fetch(`/api/onboardings/${data.id}`, { method: "DELETE" });
+    if (!response.ok) {
+      const result = await response.json();
+      window.alert(result.error ?? "Nao foi possivel excluir o onboarding.");
+      setDeleting(false);
+      return;
+    }
+
+    window.location.href = "/admin";
+  }
+
   return (
     <main className="shell">
       <header className="topbar">
@@ -65,6 +97,34 @@ export default function AdminOnboardingDetalhe({ onboarding, statusOptions, vali
           <Link className="button primary" href={linkCliente} target="_blank">
             Abrir cliente
           </Link>
+          <button className="button danger-button" disabled={deleting} onClick={excluirOnboarding}>
+            {deleting ? "Excluindo..." : "Excluir onboarding"}
+          </button>
+        </div>
+      </section>
+
+      <section className="detail-grid">
+        <div className="panel">
+          <h2>Usuarios e perfis</h2>
+          {usuariosPerfis.length === 0 ? (
+            <p className="muted">Nenhum usuario informado.</p>
+          ) : (
+            usuariosPerfis.map((usuario: any, index: number) => (
+              <p key={index}>
+                <strong>{usuario.nome || "Nome nao informado"}:</strong> Senha: {usuario.senha || "Nao informada"} | Setor: {usuario.setor || usuario.perfil || "Nao informado"}
+              </p>
+            ))
+          )}
+        </div>
+        <div className="panel">
+          <h2>Maquinas</h2>
+          {maquinas.length === 0 ? (
+            <p className="muted">Nenhuma maquina informada.</p>
+          ) : (
+            maquinas.map((maquina: any, index: number) => (
+              <p key={index}><strong>{maquina.identificacao || "Maquina nao informada"}:</strong> {maquina.detalhes || "Sem detalhes"}</p>
+            ))
+          )}
         </div>
       </section>
 
