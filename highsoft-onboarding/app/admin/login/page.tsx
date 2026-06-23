@@ -28,7 +28,6 @@ export default function LoginPage() {
   return (
     <main className="auth-page">
       <form className="auth-box" onSubmit={submit}>
-        <img src="/logo-highsoft.svg" alt="Highsoft Sistemas" className="auth-logo" />
         <h1>Administração</h1>
         <label>
           E-mail

@@ -10,3 +10,47 @@
  ✓ Ready in 5.2s
  ○ Compiling /middleware ...
  ✓ Compiled /middleware in 1060ms (72 modules)
+ ○ Compiling /admin/login ...
+ ✓ Compiled /admin/login in 5.9s (461 modules)
+ GET /admin/login 200 in 6346ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1091ms (493 modules)
+ GET / 200 in 1486ms
+ ✓ Compiled /api/admin/login in 503ms (289 modules)
+ POST /api/admin/login 200 in 1512ms
+ ✓ Compiled /admin in 495ms (551 modules)
+ GET /admin 200 in 955ms
+ ✓ Compiled /admin/onboardings/novo in 505ms (560 modules)
+ ○ Compiling /api/onboardings ...
+ ✓ Compiled /api/onboardings in 546ms (314 modules)
+ POST /api/onboardings 200 in 866ms
+ ○ Compiling /admin/onboardings/[id] ...
+ ✓ Compiled /admin/onboardings/[id] in 835ms (573 modules)
+ ○ Compiling /cliente/[token] ...
+ ✓ Compiled /cliente/[token] in 755ms (589 modules)
+ GET /cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs 200 in 2119ms
+ ○ Compiling /api/cliente/[token]/upload ...
+ ✓ Compiled /api/cliente/[token]/upload in 626ms (326 modules)
+ POST /api/cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs/upload 200 in 1826ms
+ ✓ Compiled /api/cliente/[token] in 383ms (328 modules)
+ GET /api/cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs 200 in 1503ms
+ POST /api/cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs/upload 200 in 101ms
+ GET /api/cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs 200 in 52ms
+ GET /cliente/LsB1wyUTxrplqY1yuqqPZhr-i28J-a7E3-sm7GuKKxs 200 in 371ms
+ ✓ Compiled in 1481ms (550 modules)
+ ✓ Compiled in 588ms (550 modules)
+ ✓ Compiled in 540ms (550 modules)
+ ✓ Compiled in 640ms (550 modules)
+ ✓ Compiled in 512ms (550 modules)
+ ✓ Compiled in 505ms (564 modules)
+ GET /admin/onboardings/novo 200 in 240ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1215ms (553 modules)
+ GET /_next/static/css/app/layout.css?v=1782175083871 404 in 1649ms
+ GET /_next/static/chunks/webpack.js?v=1782175083871 404 in 1645ms
+ GET /_next/static/chunks/main-app.js?v=1782175083871 404 in 1628ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 1627ms
+ GET /_next/static/chunks/app/admin/onboardings/novo/page.js 404 in 1627ms
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 2.9s (780 modules)
+ GET /admin/login 500 in 3433ms

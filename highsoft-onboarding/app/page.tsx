@@ -4,7 +4,6 @@ export default function HomePage() {
   return (
     <main className="home">
       <section className="home-panel">
-        <img src="/logo-highsoft.svg" alt="Highsoft Sistemas" className="home-logo" />
         <h1>Highsoft Onboarding</h1>
         <p>Sistema interno para criar onboardings, gerar links seguros e acompanhar documentos enviados por clientes.</p>
         <Link className="button primary" href="/admin">

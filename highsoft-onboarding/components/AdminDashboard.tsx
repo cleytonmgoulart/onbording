@@ -109,7 +109,6 @@ function Header() {
   return (
     <header className="topbar">
       <Link href="/admin" className="brand">
-        <img src="/logo-highsoft.svg" alt="" />
         <span>Highsoft Onboarding</span>
       </Link>
       <button className="button ghost" onClick={logout}>

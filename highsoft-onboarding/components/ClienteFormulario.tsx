@@ -75,7 +75,6 @@ export default function ClienteFormulario({ token, onboarding, statusOptions, pa
   return (
     <main className="client-shell">
       <header className="client-header">
-        <img src="/logo-highsoft.svg" alt="Highsoft Sistemas" />
         <div>
           <h1>Onboarding Highsoft</h1>
           <p>Preencha as informações e envie os arquivos solicitados.</p>

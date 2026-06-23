@@ -27,7 +27,6 @@ export default function AdminOnboardingForm() {
     <main className="shell">
       <header className="topbar">
         <Link href="/admin" className="brand">
-          <img src="/logo-highsoft.svg" alt="" />
           <span>Highsoft Onboarding</span>
         </Link>
       </header>
